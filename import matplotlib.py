@@ -3,8 +3,8 @@ import pandas as pd
 import numpy as np
 
 # Data
-data_faltam = {'Guarulhos': 29, 'Mogi das Cruzes': 13, 'Santo André': 17,'Campinas': 15, 'Ribeirão Preto': 2, 'São Paulo': 199}
-confirmados = 406
+data_faltam = {'Guarulhos': 29, 'Mogi das Cruzes': 13, 'Santo André': 17,'Campinas': 15, 'Ribeirão Preto': 2, 'São Paulo': 180}
+confirmados = 424
 analises = 60
 total = sum(data_faltam.values()) + confirmados + analises
 
@@ -63,7 +63,7 @@ plt.savefig('analise_vt_dashboard_fullhd.png', facecolor=fig.get_facecolor(), dp
 # Salvar CSV para gerenciamento
 df_report = pd.DataFrame({
     'Categoria': ['Confirmados', 'Análises não concluídas', 'Faltam (Guarulhos)', 'Faltam (Mogi)', 'Faltam (Santo André)', 'Faltam(Campinas)', 'Faltam(Ribeirão Preto)', 'Faltam(São Paulo)'],
-    'Quantidade': [406, 60, 29, 13, 17, 15, 2, 199]
+    'Quantidade': [424, 60, 29, 13, 17, 15, 2, 180]
 })
 plt.show()
 df_report.to_csv('relatorio_gestao_vt.csv', index=False)
