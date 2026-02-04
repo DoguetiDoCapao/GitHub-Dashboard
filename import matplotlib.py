@@ -3,13 +3,13 @@ import pandas as pd
 import numpy as np
 
 # Data
-data_faltam = {'Guarulhos': 29, 'Mogi das Cruzes': 13, 'Santo André': 17,'Campinas': 15, 'Ribeirão Preto': 2, 'São Paulo': 162}
-confirmados = 438
+data_faltam = {'Guarulhos': 29, 'Mogi das Cruzes': 13, 'Santo André': 17,'Campinas': 15, 'Ribeirão Preto': 2, 'São Paulo': 153}
+confirmados = 446
 analises = 60
 total = sum(data_faltam.values()) + confirmados + analises
 
 # Setup Figure - Full HD (1920x1080)
-fig = plt.figure(figsize=(19.2, 10.8), dpi=100)
+fig = plt.figure(figsize=(19.2, 10.8), dpi=70)
 fig.patch.set_facecolor('#0f172a') # Dark slate background
 
 # Title
@@ -37,7 +37,7 @@ wedges, texts, autotexts = ax_donut.pie(sizes_donut, labels=None, autopct='%1.1f
                                        textprops={'color':"w", 'weight':'bold', 'fontsize':15})
 centre_circle = plt.Circle((0,0), 0.70, fc='#0f172a')
 ax_donut.add_artist(centre_circle)
-ax_donut.set_title('Distribuição Percentual', color='white', fontsize=22, pad=20)
+ax_donut.set_title('Distribuição Percentual', color='white', fontsize=22, pad=18)
 
 # 3. Gráfico das barras - Faltam por Cidade
 ax_bar = fig.add_axes([0.65, 0.15, 0.3, 0.7])
@@ -45,7 +45,7 @@ ax_bar.set_facecolor('#1e293b')
 cities = list(data_faltam.keys())
 counts = list(data_faltam.values())
 bars = ax_bar.barh(cities, counts, color='#f59e0b', edgecolor='white', alpha=0.9)
-ax_bar.set_title('Pendências por Cidade', color='white', fontsize=22, pad=20)
+ax_bar.set_title('Pendências por Cidade', color='white', fontsize=22, pad=18)
 ax_bar.tick_params(axis='both', colors='white', labelsize=14)
 ax_bar.spines['top'].set_visible(False)
 ax_bar.spines['right'].set_visible(False)
@@ -63,7 +63,7 @@ plt.savefig('analise_vt_dashboard_fullhd.png', facecolor=fig.get_facecolor(), dp
 # Salvar CSV para gerenciamento
 df_report = pd.DataFrame({
     'Categoria': ['Confirmados', 'Análises não concluídas', 'Faltam (Guarulhos)', 'Faltam (Mogi)', 'Faltam (Santo André)', 'Faltam(Campinas)', 'Faltam(Ribeirão Preto)', 'Faltam(São Paulo)'],
-    'Quantidade': [438, 60, 29, 13, 17, 15, 2, 162]
+    'Quantidade': [446, 60, 29, 13, 17, 15, 2, 153]
 })
 plt.show()
 df_report.to_csv('relatorio_gestao_vt.csv', index=False)
