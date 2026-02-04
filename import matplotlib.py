@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
 
-# Data
+# Data - Somas e separação das cidades
 data_faltam = {'Guarulhos': 29, 'Mogi das Cruzes': 13, 'Santo André': 17,'Campinas': 15, 'Ribeirão Preto': 2, 'São Paulo': 153}
 confirmados = 446
 analises = 60
@@ -12,10 +12,10 @@ total = sum(data_faltam.values()) + confirmados + analises
 fig = plt.figure(figsize=(19.2, 10.8), dpi=70)
 fig.patch.set_facecolor('#0f172a') # Dark slate background
 
-# Title
+# Titulo Principal do Dashboard
 plt.suptitle('Análise VT - Gestão RH', fontsize=42, color='white', fontweight='bold', y=0.95)
 
-# 1. Main KPI Cards (Visual representation using text boxes)
+# 1. Cartões de KPIs principais (Represenção visual usando caixas de texto)
 def draw_kpi(ax, label, value, color, pos_y):
     ax.text(0.5, pos_y, str(value), fontsize=60, color=color, fontweight='bold', ha='center')
     ax.text(0.5, pos_y-0.12, label, fontsize=20, color='white', alpha=0.8, ha='center')
@@ -27,19 +27,19 @@ draw_kpi(ax_kpis, 'Confirmados', confirmados, '#10b981', 0.60)
 draw_kpi(ax_kpis, 'Análises Pendentes', analises, '#8b5cf6', 0.35)
 draw_kpi(ax_kpis, 'Faltam Enviar (Total)', sum(data_faltam.values()), '#f59e0b', 0.10)
 
-# 2. Gráfico de Pizza - Visão Geral
+# 2. Gráfico de Pizza - Visão Geral - (Donut Chart)
 ax_donut = fig.add_axes([0.35, 0.45, 0.25, 0.4])
 labels_donut = ['Confirmados', 'Faltam', 'Análises']
 sizes_donut = [confirmados, sum(data_faltam.values()), analises]
 colors_donut = ['#10b981', '#f59e0b', '#8b5cf6']
-wedges, texts, autotexts = ax_donut.pie(sizes_donut, labels=None, autopct='%1.1f%%',
+wedges, texts, autotexts = ax_donut.pie(sizes_donut, labels=None, autopct='%1.1f%%',# Auto Formação percentual
                                        startangle=90, colors=colors_donut, pctdistance=0.85,
                                        textprops={'color':"w", 'weight':'bold', 'fontsize':15})
 centre_circle = plt.Circle((0,0), 0.70, fc='#0f172a')
 ax_donut.add_artist(centre_circle)
 ax_donut.set_title('Distribuição Percentual', color='white', fontsize=22, pad=18)
 
-# 3. Gráfico das barras - Faltam por Cidade
+# 3. Gráfico das barras - "Pendências por Cidade"
 ax_bar = fig.add_axes([0.65, 0.15, 0.3, 0.7])
 ax_bar.set_facecolor('#1e293b')
 cities = list(data_faltam.keys())
